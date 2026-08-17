@@ -1,24 +1,24 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { 
-  Home, 
-  User, 
-  Layers, 
-  Award, 
-  MessageSquare, 
-  Mail, 
-  Github, 
-  Cpu, 
-  Sparkles, 
-  Sliders, 
-  Terminal, 
-  ArrowRight, 
+import {
+  Home,
+  User,
+  Layers,
+  Award,
+  MessageSquare,
+  Mail,
+  Github,
+  Cpu,
+  Sparkles,
+  Sliders,
+  Terminal,
+  ArrowRight,
   Star,
   Activity,
   Flame,
-  CheckCircle2, 
-  Trophy, 
-  FileCheck, 
-  CheckSquare, 
+  CheckCircle2,
+  Trophy,
+  FileCheck,
+  CheckSquare,
   Rocket,
   Copy,
   Check,
@@ -32,15 +32,15 @@ import {
   Maximize2
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { 
-  identity, 
-  aboutCopy, 
-  techStack, 
-  featuredProjects, 
-  achievements, 
-  currentFocus, 
-  skillIcons, 
-  githubWidgets 
+import {
+  identity,
+  aboutCopy,
+  techStack,
+  featuredProjects,
+  achievements,
+  currentFocus,
+  skillIcons,
+  githubWidgets
 } from './data';
 import GreenDataFabric from './components/GreenDataFabric';
 import DecryptedText from './components/DecryptedText';
@@ -61,12 +61,9 @@ export default function App() {
   const [copiedText, setCopiedText] = useState(false);
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [projectFilter, setProjectFilter] = useState<'all' | 'featured' | 'web' | 'ai'>('all');
-  
+
   // Real-time GitHub stars state map
   const [repoStars, setRepoStars] = useState<{ [repo: string]: number }>({});
-
-  // 3D Parallax tilt state for the image workspace
-  const [imageTilt, setImageTilt] = useState({ rotateX: 0, rotateY: 0 });
 
   // Fetch GitHub stars asynchronously
   useEffect(() => {
@@ -111,40 +108,35 @@ export default function App() {
       src: pritamHoodieSide,
       alt: 'Pritam Biswas hoodie profile',
       label: 'PORTRAIT // HOODIE_SIDE',
-      status: 'TARGET_LOCKED // 99.8%',
-      coords: 'LAT: 23.8103° N, LON: 90.4125° E'
+      status: 'TRACKING_OK'
     },
     {
       type: 'image',
       src: pritamOutdoorPortrait,
       alt: 'Pritam Biswas outdoor portrait',
       label: 'PORTRAIT // OUTDOOR',
-      status: 'TARGET_LOCKED // 99.4%',
-      coords: 'LAT: 23.7771° N, LON: 90.3994° E'
+      status: 'TRACKING_OK'
     },
     {
       type: 'image',
       src: pritamStudioPortrait,
       alt: 'Pritam Biswas studio portrait',
       label: 'PORTRAIT // STUDIO',
-      status: 'TARGET_LOCKED // 100.0%',
-      coords: 'LAT: 23.8103° N, LON: 90.4125° E'
+      status: 'TRACKING_OK'
     },
     {
       type: 'image',
       src: pritamCasualPortrait,
       alt: 'Pritam Biswas casual portrait',
       label: 'PORTRAIT // CASUAL',
-      status: 'TARGET_LOCKED // 99.7%',
-      coords: 'LAT: 23.8759° N, LON: 90.3795° E'
+      status: 'TRACKING_OK'
     },
     {
       type: 'image',
       src: pritamCreativePortrait,
       alt: 'Pritam Biswas creative portrait',
       label: 'PORTRAIT // CREATIVE',
-      status: 'TARGET_LOCKED // 99.9%',
-      coords: 'LAT: 23.7925° N, LON: 90.4078° E'
+      status: 'TRACKING_OK'
     }
   ];
 
@@ -201,7 +193,7 @@ exploring:
   - Machine learning clustering and deep learning architectures
   - Open source contribution workflows and distributed systems
   - Cloud infrastructure & deployment automation`;
-    
+
     const success = await copyToClipboard(yamlString);
     if (success) {
       setCopiedText(true);
@@ -217,29 +209,14 @@ exploring:
     }
   };
 
-  const handleImageMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
-    setImageTilt({
-      rotateX: -(y / (rect.height / 2)) * 8,
-      rotateY: (x / (rect.width / 2)) * 8,
-    });
-  };
-
-  const handleImageMouseLeave = () => {
-    setImageTilt({ rotateX: 0, rotateY: 0 });
-    setSliderHovered(false);
-  };
-
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) return;
-    
+
     const subject = encodeURIComponent(`Portfolio Inquiry from ${formData.name}`);
     const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`);
     window.location.href = `mailto:${identity.email}?subject=${subject}&body=${body}`;
-    
+
     setFormSubmitted(true);
     setTimeout(() => {
       setFormData({ name: '', email: '', message: '' });
@@ -264,43 +241,43 @@ exploring:
       <aside className="hidden md:flex w-[68px] shrink-0 border-r border-white/[0.06] bg-[#0c0d0f]/90 backdrop-blur-xl flex-col items-center py-6 justify-between z-30 shadow-[4px_0_24px_rgba(0,0,0,0.5)] relative">
         <div className="flex flex-col gap-6 items-center w-full">
           {/* Logo badge with decrypt hover animation */}
-          <div 
+          <div
             onClick={() => setActivePage('home')}
             className="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/[0.08] flex items-center justify-center mb-2 shadow-lg cursor-pointer transition-all hover:border-[#00e559]/50 hover:bg-white/[0.08] font-mono text-[11px] font-bold text-[#00e559] group"
           >
             <DecryptedText text="PB" speed={30} animateOn="hover" />
           </div>
-          
+
           <nav className="flex flex-col gap-3 w-full px-3" id="sidebar-nav">
-            <button 
+            <button
               onClick={() => setActivePage('home')}
               className={`w-full aspect-square rounded-xl flex items-center justify-center transition-all duration-300 ${activePage === 'home' ? 'bg-[#00e559] text-black shadow-[0_0_18px_rgba(0,229,89,0.5)] font-bold scale-105' : 'text-zinc-500 hover:text-zinc-200 hover:bg-white/[0.04]'}`}
               title="Home"
             >
               <Home className="w-5 h-5" />
             </button>
-            <button 
+            <button
               onClick={() => setActivePage('about')}
               className={`w-full aspect-square rounded-xl flex items-center justify-center transition-all duration-300 ${activePage === 'about' ? 'bg-[#00e559] text-black shadow-[0_0_18px_rgba(0,229,89,0.5)] font-bold scale-105' : 'text-zinc-500 hover:text-zinc-200 hover:bg-white/[0.04]'}`}
               title="About & Tech Stack"
             >
               <User className="w-5 h-5" />
             </button>
-            <button 
+            <button
               onClick={() => setActivePage('projects')}
               className={`w-full aspect-square rounded-xl flex items-center justify-center transition-all duration-300 ${activePage === 'projects' ? 'bg-[#00e559] text-black shadow-[0_0_18px_rgba(0,229,89,0.5)] font-bold scale-105' : 'text-zinc-500 hover:text-zinc-200 hover:bg-white/[0.04]'}`}
               title="Projects & Repositories"
             >
               <Layers className="w-5 h-5" />
             </button>
-            <button 
+            <button
               onClick={() => setActivePage('achievements')}
               className={`w-full aspect-square rounded-xl flex items-center justify-center transition-all duration-300 ${activePage === 'achievements' ? 'bg-[#00e559] text-black shadow-[0_0_18px_rgba(0,229,89,0.5)] font-bold scale-105' : 'text-zinc-500 hover:text-zinc-200 hover:bg-white/[0.04]'}`}
               title="Achievements & GitHub Stats"
             >
               <Award className="w-5 h-5" />
             </button>
-            <button 
+            <button
               onClick={() => setActivePage('contact')}
               className={`w-full aspect-square rounded-xl flex items-center justify-center transition-all duration-300 ${activePage === 'contact' ? 'bg-[#00e559] text-black shadow-[0_0_18px_rgba(0,229,89,0.5)] font-bold scale-105' : 'text-zinc-500 hover:text-zinc-200 hover:bg-white/[0.04]'}`}
               title="Contact"
@@ -311,7 +288,7 @@ exploring:
         </div>
 
         {/* Email Shortcut with interactive copy tooltip */}
-        <button 
+        <button
           onClick={handleCopyEmail}
           className="w-10 h-10 rounded-xl flex items-center justify-center text-zinc-500 transition-colors hover:text-[#00e559] hover:bg-white/[0.04] relative group"
           title="Click to copy email"
@@ -330,9 +307,9 @@ exploring:
         <header className="h-[72px] flex items-center justify-between px-6 md:px-8 border-b border-white/[0.04] bg-[#09090b]/80 backdrop-blur-md z-30 relative shrink-0">
           <div className="flex items-center gap-3">
             <h1 id="page-title" className="text-lg font-medium text-zinc-100 tracking-tight select-text flex items-center gap-2">
-              <DecryptedText 
-                text={activePage === 'about' ? 'ABOUT & TECH STACK' : activePage === 'achievements' ? 'ACHIEVEMENTS & STATS' : activePage.toUpperCase()} 
-                speed={25} 
+              <DecryptedText
+                text={activePage === 'about' ? 'ABOUT & TECH STACK' : activePage === 'achievements' ? 'ACHIEVEMENTS & STATS' : activePage.toUpperCase()}
+                speed={25}
                 animateOn="always"
               />
             </h1>
@@ -349,54 +326,54 @@ exploring:
               </div>
             </div>
           </div>
-          
+
           <div className="flex items-center gap-4">
             <span className="font-mono text-[11px] text-zinc-400 tracking-wider hidden sm:block">DHAKA, BANGLADESH</span>
             <div className="w-[1px] h-4 bg-white/10 mx-1 hidden sm:block"></div>
-            
+
             {/* Social Links Panel */}
             <div className="flex items-center gap-2">
-              <a 
-                href={identity.github} 
-                target="_blank" 
-                rel="noreferrer" 
-                className="w-9 h-9 rounded-full border border-white/[0.08] bg-[#0c0d0f]/80 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-white/[0.04] hover:border-[#00e559]/40 transition-all duration-300" 
+              <a
+                href={identity.github}
+                target="_blank"
+                rel="noreferrer"
+                className="w-9 h-9 rounded-full border border-white/[0.08] bg-[#0c0d0f]/80 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-white/[0.04] hover:border-[#00e559]/40 transition-all duration-300"
                 title="GitHub"
               >
                 <Github className="w-4 h-4" />
               </a>
-              <a 
-                href={identity.leetcode} 
-                target="_blank" 
-                rel="noreferrer" 
-                className="w-9 h-9 rounded-full border border-white/[0.08] bg-[#0c0d0f]/80 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-white/[0.04] hover:border-[#FFA116]/40 transition-all duration-300" 
+              <a
+                href={identity.leetcode}
+                target="_blank"
+                rel="noreferrer"
+                className="w-9 h-9 rounded-full border border-white/[0.08] bg-[#0c0d0f]/80 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-white/[0.04] hover:border-[#FFA116]/40 transition-all duration-300"
                 title="LeetCode"
               >
                 <span className="font-mono text-xs font-bold text-[#FFA116]">LC</span>
               </a>
-              <a 
-                href={identity.codeforces} 
-                target="_blank" 
-                rel="noreferrer" 
-                className="w-9 h-9 rounded-full border border-white/[0.08] bg-[#0c0d0f]/80 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-white/[0.04] hover:border-[#38bdf8]/40 transition-all duration-300" 
+              <a
+                href={identity.codeforces}
+                target="_blank"
+                rel="noreferrer"
+                className="w-9 h-9 rounded-full border border-white/[0.08] bg-[#0c0d0f]/80 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-white/[0.04] hover:border-[#38bdf8]/40 transition-all duration-300"
                 title="Codeforces"
               >
                 <span className="font-mono text-[10px] font-bold text-[#1F8ACB]">CF</span>
               </a>
-              <a 
-                href={identity.facebook} 
-                target="_blank" 
-                rel="noreferrer" 
-                className="w-9 h-9 rounded-full border border-white/[0.08] bg-[#0c0d0f]/80 flex items-center justify-center text-zinc-400 hover:text-[#1877F2] hover:bg-[#1877F2]/10 hover:border-[#1877F2]/30 transition-all duration-300" 
+              <a
+                href={identity.facebook}
+                target="_blank"
+                rel="noreferrer"
+                className="w-9 h-9 rounded-full border border-white/[0.08] bg-[#0c0d0f]/80 flex items-center justify-center text-zinc-400 hover:text-[#1877F2] hover:bg-[#1877F2]/10 hover:border-[#1877F2]/30 transition-all duration-300"
                 title="Facebook"
               >
                 <Facebook className="w-4 h-4" />
               </a>
-              <a 
-                href={identity.instagram} 
-                target="_blank" 
-                rel="noreferrer" 
-                className="w-9 h-9 rounded-full border border-white/[0.08] bg-[#0c0d0f]/80 flex items-center justify-center text-zinc-400 hover:text-[#E1306C] hover:bg-[#E1306C]/10 hover:border-[#E1306C]/30 transition-all duration-300" 
+              <a
+                href={identity.instagram}
+                target="_blank"
+                rel="noreferrer"
+                className="w-9 h-9 rounded-full border border-white/[0.08] bg-[#0c0d0f]/80 flex items-center justify-center text-zinc-400 hover:text-[#E1306C] hover:bg-[#E1306C]/10 hover:border-[#E1306C]/30 transition-all duration-300"
                 title="Instagram"
               >
                 <Instagram className="w-4 h-4" />
@@ -407,7 +384,7 @@ exploring:
 
         {/* Ambient background decoration layers */}
         <div className="absolute inset-0 z-0 opacity-20 pointer-events-none bg-grid-pattern" />
-        
+
         {/* Soft glowing ambient backing lights */}
         <div className="absolute top-[25%] left-[20%] -translate-x-1/2 -translate-y-1/2 w-[600px] h-[450px] rounded-full bg-[#00e559]/[0.025] blur-[120px] pointer-events-none z-0 glow-overlay-1" />
         <div className="absolute bottom-[20%] right-[15%] w-[700px] h-[550px] rounded-full bg-[#38bdf8]/[0.02] blur-[140px] pointer-events-none z-0 glow-overlay-2" />
@@ -451,7 +428,7 @@ exploring:
                         </div>
                         <div className="w-2 h-2 rounded-full bg-[#00e559] shadow-[0_0_8px_#00e559]"></div>
                       </div>
-                      
+
                       <div className="space-y-4">
                         <div>
                           <label className="font-mono text-[10px] text-zinc-500 mb-1 block uppercase tracking-wider font-semibold">Name</label>
@@ -481,7 +458,7 @@ exploring:
                         </div>
                       </div>
                     </div>
-                    
+
                     <div className="mt-6 pt-4 border-t border-white/[0.04] flex items-center justify-between">
                       <div>
                         <span className="font-mono text-[9px] text-zinc-600 block">SYSTEM CONSOLE REGISTER</span>
@@ -499,7 +476,7 @@ exploring:
                     <div className="bg-[#121316]/95 backdrop-blur-xl border border-white/[0.08] hover:border-[#00e559]/30 rounded-[20px] p-5 shadow-2xl relative flex-1 flex flex-col justify-between hover-lift transition-all">
                       <div className="hidden lg:block absolute top-1/2 -left-[5px] -translate-y-1/2 w-2.5 h-2.5 bg-[#00e559] rounded-sm rotate-45 shadow-[0_0_10px_#00e559]"></div>
                       <div className="hidden lg:block absolute -bottom-[5px] left-1/2 -translate-x-1/2 w-2.5 h-2.5 bg-[#00e559] rounded-sm rotate-45 shadow-[0_0_10px_#00e559]"></div>
-                      
+
                       <div>
                         <div className="flex items-center justify-between mb-4">
                           <div className="flex items-center gap-2 text-sm font-medium text-gray-200 tracking-tight">
@@ -508,14 +485,14 @@ exploring:
                           </div>
                           <div className="w-2 h-2 rounded-full bg-[#00e559] shadow-[0_0_8px_#00e559]"></div>
                         </div>
-                        
+
                         {/* Interactive Decrypted Text Scramble Stream */}
                         <div className="bg-[#09090b]/80 border border-white/[0.06] p-4 rounded-xl font-mono text-xs text-[#38bdf8] min-h-[72px] relative overflow-hidden select-text shadow-inner flex items-center">
                           <span className="text-zinc-500 mr-2">&gt;</span>
                           <span className="text-[#00e559] font-bold text-sm">
-                            <DecryptedText 
-                              text={identity.roles[taglineIndex]} 
-                              speed={28} 
+                            <DecryptedText
+                              text={identity.roles[taglineIndex]}
+                              speed={28}
                               maxIterations={12}
                               animateOn="always"
                               encryptedClassName="text-[#38bdf8] opacity-80"
@@ -523,7 +500,7 @@ exploring:
                           </span>
                           <span className="w-1.5 h-4 bg-[#00e559] inline-block ml-1 cursor-blink" />
                         </div>
-                        
+
                         <p className="text-xs text-zinc-400 mt-4 leading-relaxed font-sans select-text">
                           {aboutCopy.intro}
                         </p>
@@ -549,7 +526,7 @@ exploring:
                     <div className="bg-[#121316]/95 backdrop-blur-xl border border-white/[0.08] hover:border-[#00e559]/30 rounded-[20px] p-5 shadow-2xl relative hover-lift transition-all">
                       <div className="hidden lg:block absolute top-1/2 -left-[5px] -translate-y-1/2 w-2.5 h-2.5 bg-[#00e559] rounded-sm rotate-45 shadow-[0_0_10px_#00e559]"></div>
                       <div className="hidden lg:block absolute -top-[5px] left-1/2 -translate-x-1/2 w-2.5 h-2.5 bg-[#00e559] rounded-sm rotate-45 shadow-[0_0_10px_#00e559]"></div>
-                      
+
                       <div className="flex items-center justify-between mb-5">
                         <div className="flex items-center gap-2 text-sm font-medium text-gray-200 tracking-tight">
                           <Sliders className="w-4 h-4 text-zinc-400" />
@@ -566,8 +543,8 @@ exploring:
                             <span className="font-mono text-[9px] px-1.5 py-0.5 rounded bg-[#00e559]/10 text-[#00e559] font-semibold uppercase">ACTIVE (90)</span>
                           </div>
                           <div className="h-2 bg-[#1a1b1e] border border-white/[0.04] rounded-full overflow-hidden">
-                            <div 
-                              className="h-full bg-[#00e559] rounded-full transition-all duration-[1500ms] ease-out shadow-[0_0_8px_#00e559]" 
+                            <div
+                              className="h-full bg-[#00e559] rounded-full transition-all duration-[1500ms] ease-out shadow-[0_0_8px_#00e559]"
                               style={{ width: skillsVisible ? '90%' : '0%' }}
                             />
                           </div>
@@ -580,8 +557,8 @@ exploring:
                             <span className="font-mono text-[9px] px-1.5 py-0.5 rounded bg-[#00e559]/10 text-[#00e559] font-semibold uppercase">ACTIVE (85)</span>
                           </div>
                           <div className="h-2 bg-[#1a1b1e] border border-white/[0.04] rounded-full overflow-hidden">
-                            <div 
-                              className="h-full bg-[#00e559] rounded-full transition-all duration-[1500ms] ease-out shadow-[0_0_8px_#00e559]" 
+                            <div
+                              className="h-full bg-[#00e559] rounded-full transition-all duration-[1500ms] ease-out shadow-[0_0_8px_#00e559]"
                               style={{ width: skillsVisible ? '85%' : '0%' }}
                             />
                           </div>
@@ -594,8 +571,8 @@ exploring:
                             <span className="font-mono text-[9px] px-1.5 py-0.5 rounded bg-[#38bdf8]/10 text-[#38bdf8] font-semibold uppercase">EXPLORING (65)</span>
                           </div>
                           <div className="h-2 bg-[#1a1b1e] border border-white/[0.04] rounded-full overflow-hidden">
-                            <div 
-                              className="h-full bg-[#38bdf8] rounded-full transition-all duration-[1500ms] ease-out shadow-[0_0_8px_#38bdf8]" 
+                            <div
+                              className="h-full bg-[#38bdf8] rounded-full transition-all duration-[1500ms] ease-out shadow-[0_0_8px_#38bdf8]"
                               style={{ width: skillsVisible ? '65%' : '0%' }}
                             />
                           </div>
@@ -608,8 +585,8 @@ exploring:
                             <span className="font-mono text-[9px] px-1.5 py-0.5 rounded bg-[#A78BFA]/10 text-[#A78BFA] font-semibold uppercase">LEARNING (55)</span>
                           </div>
                           <div className="h-2 bg-[#1a1b1e] border border-white/[0.04] rounded-full overflow-hidden">
-                            <div 
-                              className="h-full bg-[#A78BFA] rounded-full transition-all duration-[1500ms] ease-out shadow-[0_0_8px_#A78BFA]" 
+                            <div
+                              className="h-full bg-[#A78BFA] rounded-full transition-all duration-[1500ms] ease-out shadow-[0_0_8px_#A78BFA]"
                               style={{ width: skillsVisible ? '55%' : '0%' }}
                             />
                           </div>
@@ -619,34 +596,25 @@ exploring:
                   </div>
 
                   {/* Right: Console showcase panel with Holographic HUD, Laser Scanner, and 3D Parallax Tilt */}
-                  <div 
+                  <div
                     className="bg-[#121316]/95 backdrop-blur-xl border border-white/[0.08] hover:border-[#00e559]/40 rounded-[24px] p-5 shadow-2xl relative flex flex-col justify-between hover-lift transition-all"
                   >
                     <div className="hidden lg:block absolute top-1/2 -left-[5px] -translate-y-1/2 w-2.5 h-2.5 bg-[#00e559] rounded-sm rotate-45 shadow-[0_0_10px_#00e559]"></div>
-                    
+
                     <div>
                       <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center gap-2 text-sm font-medium text-gray-200 tracking-tight">
                           <Terminal className="w-4 h-4 text-[#00e559]" />
                           <span>Console Workspace</span>
                         </div>
-                        <div className="flex items-center gap-1.5">
-                          <span className="font-mono text-[9px] text-[#00e559] px-2 py-0.5 rounded bg-[#00e559]/10 font-bold border border-[#00e559]/20">
-                            HUD // ACTIVE
-                          </span>
-                        </div>
+                        <div className="w-2 h-2 rounded-full bg-[#00e559] shadow-[0_0_8px_#00e559]"></div>
                       </div>
 
-                      {/* Interactive Console Image Slider with 3D Parallax & Laser Scanner */}
-                      <div 
-                        onMouseMove={handleImageMouseMove}
+                      {/* Interactive Console Image Slider */}
+                      <div
                         onMouseEnter={() => setSliderHovered(true)}
-                        onMouseLeave={handleImageMouseLeave}
-                        style={{
-                          transform: `perspective(1000px) rotateX(${imageTilt.rotateX}deg) rotateY(${imageTilt.rotateY}deg)`,
-                          transition: sliderHovered ? 'transform 0.1s ease-out' : 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)'
-                        }}
-                        className="w-full aspect-square rounded-2xl border border-white/20 shadow-[0_0_40px_rgba(0,229,89,0.15)] bg-[#0c0d0f] flex flex-col items-center justify-center relative overflow-hidden mb-4 group cursor-crosshair"
+                        onMouseLeave={() => setSliderHovered(false)}
+                        className="w-full aspect-square rounded-2xl border border-white/20 shadow-[0_0_40px_rgba(0,229,89,0.15)] bg-[#0c0d0f] flex flex-col items-center justify-center relative overflow-hidden mb-4 group"
                       >
                         <AnimatePresence initial={false} custom={slideDirection} mode="wait">
                           <motion.div
@@ -656,16 +624,14 @@ exploring:
                               enter: (direction: number) => ({
                                 x: direction > 0 ? '100%' : '-100%',
                                 opacity: 0,
-                                scale: 0.95,
-                                filter: 'blur(4px)'
+                                scale: 0.95
                               }),
                               center: {
                                 x: 0,
                                 opacity: 1,
                                 scale: 1,
-                                filter: 'blur(0px)',
                                 transition: {
-                                  duration: 0.45,
+                                  duration: 0.4,
                                   ease: [0.16, 1, 0.3, 1]
                                 }
                               },
@@ -673,9 +639,8 @@ exploring:
                                 x: direction < 0 ? '100%' : '-100%',
                                 opacity: 0,
                                 scale: 0.95,
-                                filter: 'blur(4px)',
                                 transition: {
-                                  duration: 0.45,
+                                  duration: 0.4,
                                   ease: [0.16, 1, 0.3, 1]
                                 }
                               })
@@ -689,38 +654,17 @@ exploring:
                               <img
                                 src={slides[currentSlide].src}
                                 alt={slides[currentSlide].alt}
-                                className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                                className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
                                 referrerPolicy="no-referrer"
                               />
 
-                              {/* Cyber Scanlines Overlay */}
-                              <div className="absolute inset-0 scanlines opacity-40 pointer-events-none" />
+                              {/* Subtle Bottom Gradient */}
+                              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
 
-                              {/* Moving Holographic Green Laser Scanner Line */}
-                              <div className="absolute inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-[#00e559] to-transparent shadow-[0_0_15px_#00e559] pointer-events-none animate-[scan-line_3s_linear_infinite]" />
-
-                              {/* Holographic HUD Targeting Reticles */}
-                              <div className="absolute top-3 left-3 w-4 h-4 border-t-2 border-l-2 border-[#00e559]/80 pointer-events-none" />
-                              <div className="absolute top-3 right-3 w-4 h-4 border-t-2 border-r-2 border-[#00e559]/80 pointer-events-none" />
-                              <div className="absolute bottom-10 left-3 w-4 h-4 border-b-2 border-l-2 border-[#00e559]/80 pointer-events-none" />
-                              <div className="absolute bottom-10 right-3 w-4 h-4 border-b-2 border-r-2 border-[#00e559]/80 pointer-events-none" />
-
-                              {/* Top Telemetry Overlay */}
-                              <div className="absolute top-3 left-8 right-8 flex items-center justify-between font-mono text-[8px] text-[#38bdf8] pointer-events-none z-10 bg-black/40 px-2 py-0.5 rounded backdrop-blur-sm border border-white/5">
-                                <span>{slides[currentSlide].coords}</span>
-                                <span className="text-[#00e559] flex items-center gap-1">
-                                  <span className="w-1.5 h-1.5 rounded-full bg-[#00e559] animate-ping inline-block" />
-                                  SYNC_OK
-                                </span>
-                              </div>
-
-                              {/* Gradient Mask */}
-                              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none" />
-                              
                               {/* Bottom Status Labels */}
-                              <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between font-mono text-[8px] text-[#00e559] z-10">
+                              <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between font-mono text-[9px] text-[#00e559] z-10">
                                 <span className="font-semibold">{slides[currentSlide].label}</span>
-                                <span className="text-zinc-400">{slides[currentSlide].status}</span>
+                                <span className="text-zinc-400">TRACKING_OK</span>
                               </div>
                             </div>
                           </motion.div>
@@ -784,7 +728,7 @@ exploring:
                       </div>
                     </div>
 
-                    <button 
+                    <button
                       onClick={() => setActivePage('projects')}
                       className="mt-4 w-full py-3 rounded-xl bg-[#00e559] hover:bg-[#00c54c] text-black text-xs font-bold flex items-center justify-center gap-2 transition-all shadow-[0_0_15px_rgba(0,229,89,0.25)] hover:shadow-[0_0_22px_rgba(0,229,89,0.4)] active:scale-[0.98]"
                     >
@@ -801,7 +745,7 @@ exploring:
           {/* ============ ABOUT & TECH STACK PAGE ============ */}
           {activePage === 'about' && (
             <section className="p-4 md:p-8 max-w-4xl mx-auto page-transition space-y-6">
-              
+
               {/* About description text block */}
               <div className="bg-[#121316]/95 backdrop-blur-xl border border-white/[0.08] hover:border-[#00e559]/30 rounded-[20px] p-6 md:p-8 shadow-2xl hover-lift transition-all">
                 <div className="flex items-center justify-between mb-4">
@@ -828,16 +772,16 @@ exploring:
                   </div>
                   <span className="font-mono text-[10px] text-zinc-500">SYSTEM STACK MATRIX</span>
                 </div>
-                
+
                 {/* Skillicons embedded badge streams */}
                 <div className="flex flex-col items-center gap-3 py-2">
                   {skillIcons.map((iconUrl, idx) => (
                     <div key={idx} className="p-2 rounded-xl bg-[#09090b]/80 border border-white/[0.04] shadow-inner max-w-full overflow-x-auto">
-                      <img 
-                        src={iconUrl} 
-                        alt={`Tech Stack Part ${idx + 1}`} 
-                        className="h-10 md:h-12 w-auto max-w-none transition-transform hover:scale-[1.02]" 
-                        loading="lazy" 
+                      <img
+                        src={iconUrl}
+                        alt={`Tech Stack Part ${idx + 1}`}
+                        className="h-10 md:h-12 w-auto max-w-none transition-transform hover:scale-[1.02]"
+                        loading="lazy"
                       />
                     </div>
                   ))}
@@ -901,8 +845,8 @@ exploring:
                     <Terminal className="w-4 h-4 text-zinc-400" />
                     <span className="font-mono text-xs text-[#00e559]">current_focus.yaml</span>
                   </div>
-                  
-                  <button 
+
+                  <button
                     onClick={handleCopyYaml}
                     className={`px-3 py-1.5 rounded-lg border text-xs font-mono flex items-center gap-1.5 transition-all ${copiedText ? 'border-[#00e559] bg-[#00e559]/10 text-[#00e559]' : 'border-white/[0.08] hover:border-[#00e559]/40 hover:bg-white/[0.02] text-zinc-400 hover:text-[#00e559]'}`}
                     title="Copy configuration content"
@@ -920,7 +864,7 @@ exploring:
                     )}
                   </button>
                 </div>
-                
+
                 <pre className="font-mono text-xs text-zinc-400 leading-6 overflow-x-auto select-all bg-[#09090b]/60 p-4 rounded-xl border border-white/[0.03]">
                   <span className="text-[#38bdf8]">learning</span>:
                   {currentFocus.learning.map((val) => `\n  - ${val}`)}
@@ -939,7 +883,7 @@ exploring:
           {/* ============ PROJECTS PAGE ============ */}
           {activePage === 'projects' && (
             <section className="p-4 md:p-8 max-w-5xl mx-auto page-transition space-y-6">
-              
+
               {/* Header & Filter Controls */}
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-[#121316]/90 backdrop-blur-xl border border-white/[0.08] rounded-[20px] p-5">
                 <div>
@@ -986,7 +930,7 @@ exploring:
                   const starCount = proj.repoName && repoStars[proj.repoName] !== undefined ? repoStars[proj.repoName] : (proj.stars ?? 0);
 
                   return (
-                    <div 
+                    <div
                       key={proj.id}
                       className="bg-[#121316]/95 backdrop-blur-xl border border-white/[0.08] hover:border-[#00e559]/40 rounded-[20px] p-6 shadow-2xl hover-lift flex flex-col justify-between group transition-all"
                     >
@@ -996,7 +940,7 @@ exploring:
                             <Layers className="w-4.5 h-4.5 text-[#00e559]" />
                             <DecryptedText text={proj.title} speed={25} animateOn="hover" />
                           </div>
-                          
+
                           <div className="flex items-center gap-2">
                             {proj.featured && (
                               <span className="font-mono text-[9px] px-2 py-0.5 rounded-full bg-[#00e559]/10 text-[#00e559] border border-[#00e559]/20 font-semibold">
@@ -1006,7 +950,7 @@ exploring:
                             <div className="w-2 h-2 rounded-full bg-[#00e559] shadow-[0_0_8px_#00e559]"></div>
                           </div>
                         </div>
-                        
+
                         <p className="text-xs text-zinc-300 leading-relaxed mb-3 font-sans">
                           {proj.summary}
                         </p>
@@ -1023,11 +967,11 @@ exploring:
                             </span>
                           ))}
                         </div>
-                        
+
                         <div className="flex items-center gap-2">
-                          <a 
-                            href={proj.githubUrl} 
-                            target="_blank" 
+                          <a
+                            href={proj.githubUrl}
+                            target="_blank"
                             rel="noreferrer"
                             className="text-[10px] font-mono px-3 py-1.5 rounded-lg bg-white/[0.03] hover:bg-[#00e559] hover:text-black border border-white/[0.08] text-zinc-300 font-bold uppercase flex items-center gap-1.5 transition-all"
                             title="View GitHub Repository & Star"
@@ -1044,10 +988,10 @@ exploring:
               </div>
 
               {/* GitHub platform link */}
-              <a 
-                href={identity.github} 
-                target="_blank" 
-                rel="noreferrer" 
+              <a
+                href={identity.github}
+                target="_blank"
+                rel="noreferrer"
                 className="flex items-center justify-center gap-2 py-3.5 rounded-xl border border-white/[0.08] bg-[#0c0d0f]/60 text-zinc-400 hover:text-white hover:border-[#00e559]/50 hover:bg-[#00e559]/5 transition-all text-xs font-mono shadow-lg"
               >
                 <Github className="w-4 h-4 text-[#00e559]" />
@@ -1059,7 +1003,7 @@ exploring:
           {/* ============ ACHIEVEMENTS & GITHUB STATS PAGE ============ */}
           {activePage === 'achievements' && (
             <section className="p-4 md:p-8 max-w-4xl mx-auto page-transition space-y-6">
-              
+
               {/* GitHub Stats & Real-Time Activity Section */}
               <div className="bg-[#121316]/95 backdrop-blur-xl border border-white/[0.08] hover:border-[#00e559]/30 rounded-[20px] p-6 shadow-2xl hover-lift transition-all">
                 <div className="flex items-center justify-between mb-5">
@@ -1076,18 +1020,18 @@ exploring:
                 {/* GitHub Stats Cards Grid */}
                 <div className="grid md:grid-cols-2 gap-4 items-center justify-center">
                   <div className="rounded-xl overflow-hidden bg-[#09090b] border border-white/[0.06] p-2 flex items-center justify-center shadow-inner hover:border-[#00e559]/40 transition-colors">
-                    <img 
-                      src={githubWidgets.stats} 
-                      alt="GitHub Stats Extended" 
-                      className="w-full h-auto object-contain max-h-[170px]" 
+                    <img
+                      src={githubWidgets.stats}
+                      alt="GitHub Stats Extended"
+                      className="w-full h-auto object-contain max-h-[170px]"
                       loading="lazy"
                     />
                   </div>
                   <div className="rounded-xl overflow-hidden bg-[#09090b] border border-white/[0.06] p-2 flex items-center justify-center shadow-inner hover:border-[#00e559]/40 transition-colors">
-                    <img 
-                      src={githubWidgets.streak} 
-                      alt="GitHub Readme Streak Stats" 
-                      className="w-full h-auto object-contain max-h-[170px]" 
+                    <img
+                      src={githubWidgets.streak}
+                      alt="GitHub Readme Streak Stats"
+                      className="w-full h-auto object-contain max-h-[170px]"
                       loading="lazy"
                     />
                   </div>
@@ -1095,10 +1039,10 @@ exploring:
 
                 {/* GitHub Activity Graph Banner */}
                 <div className="mt-4 rounded-xl overflow-hidden bg-[#09090b] border border-white/[0.06] p-2 flex items-center justify-center shadow-inner hover:border-[#00e559]/40 transition-colors">
-                  <img 
-                    src={githubWidgets.activityGraph} 
-                    alt="GitHub Readme Activity Graph" 
-                    className="w-full h-auto object-contain max-h-[190px]" 
+                  <img
+                    src={githubWidgets.activityGraph}
+                    alt="GitHub Readme Activity Graph"
+                    className="w-full h-auto object-contain max-h-[190px]"
                     loading="lazy"
                   />
                 </div>
@@ -1106,7 +1050,7 @@ exploring:
 
               {/* Achievements & Certifications Grid */}
               <div className="grid sm:grid-cols-2 gap-4 select-text">
-                
+
                 {/* Science Fair Winner */}
                 <div className="bg-[#121316]/95 backdrop-blur-xl border border-white/[0.08] rounded-[20px] p-5 shadow-2xl flex items-start gap-4 hover-lift">
                   <div className="w-11 h-11 rounded-xl bg-[#00e559]/10 border border-[#00e559]/20 flex items-center justify-center shrink-0">
@@ -1169,22 +1113,22 @@ exploring:
           {/* ============ CONTACT PAGE ============ */}
           {activePage === 'contact' && (
             <section className="p-4 md:p-8 max-w-2xl mx-auto page-transition">
-              
+
               <div className="bg-[#121316]/95 backdrop-blur-xl border border-white/[0.08] hover:border-[#00e559]/30 rounded-[24px] p-6 md:p-8 shadow-2xl text-center select-text transition-all">
                 <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#1a1b1e] to-[#0c0d0f] border border-white/10 flex items-center justify-center mx-auto mb-4 shadow-[0_0_20px_rgba(0,0,0,0.5)] group">
                   <span className="font-mono text-2xl font-bold text-[#00e559]">
                     <DecryptedText text="PB" speed={35} animateOn="hover" />
                   </span>
                 </div>
-                
+
                 <h2 className="text-lg text-zinc-100 font-medium mb-1">
                   <SpatialRevealText text="Let's build something extraordinary." className="text-lg text-zinc-100 font-medium" />
                 </h2>
                 <p className="text-xs text-zinc-400 mb-6 font-sans">Open to software engineering internships, open-source projects, and collaborative development.</p>
-                
+
                 {/* Contact Cards Grid */}
                 <div className="grid sm:grid-cols-2 gap-3 text-left mb-6">
-                  <div 
+                  <div
                     onClick={handleCopyEmail}
                     className="flex items-center gap-3 bg-[#1a1b1e] border border-white/5 rounded-xl px-4 py-3 hover:border-[#00e559]/50 hover:bg-[#00e559]/5 transition-all group cursor-pointer"
                     title="Click to copy email"
@@ -1199,10 +1143,10 @@ exploring:
                     </div>
                   </div>
 
-                  <a 
-                    href={identity.github} 
-                    target="_blank" 
-                    rel="noreferrer" 
+                  <a
+                    href={identity.github}
+                    target="_blank"
+                    rel="noreferrer"
                     className="flex items-center gap-3 bg-[#1a1b1e] border border-white/5 rounded-xl px-4 py-3 hover:border-[#00e559]/50 hover:bg-[#00e559]/5 transition-all"
                   >
                     <Github className="w-5 h-5 text-zinc-300 shrink-0" />
@@ -1212,10 +1156,10 @@ exploring:
                     </div>
                   </a>
 
-                  <a 
-                    href={identity.leetcode} 
-                    target="_blank" 
-                    rel="noreferrer" 
+                  <a
+                    href={identity.leetcode}
+                    target="_blank"
+                    rel="noreferrer"
                     className="flex items-center gap-3 bg-[#1a1b1e] border border-white/5 rounded-xl px-4 py-3 hover:border-[#FFA116]/50 hover:bg-[#FFA116]/5 transition-all"
                   >
                     <span className="font-mono text-sm font-bold text-[#FFA116] shrink-0 w-5 text-center">LC</span>
@@ -1225,10 +1169,10 @@ exploring:
                     </div>
                   </a>
 
-                  <a 
-                    href={identity.codeforces} 
-                    target="_blank" 
-                    rel="noreferrer" 
+                  <a
+                    href={identity.codeforces}
+                    target="_blank"
+                    rel="noreferrer"
                     className="flex items-center gap-3 bg-[#1a1b1e] border border-white/5 rounded-xl px-4 py-3 hover:border-[#1F8ACB]/50 hover:bg-[#1F8ACB]/5 transition-all"
                   >
                     <span className="font-mono text-xs font-bold text-[#1F8ACB] shrink-0 w-5 text-center">CF</span>
@@ -1238,10 +1182,10 @@ exploring:
                     </div>
                   </a>
 
-                  <a 
-                    href={identity.facebook} 
-                    target="_blank" 
-                    rel="noreferrer" 
+                  <a
+                    href={identity.facebook}
+                    target="_blank"
+                    rel="noreferrer"
                     className="flex items-center gap-3 bg-[#1a1b1e] border border-white/5 rounded-xl px-4 py-3 hover:border-[#1877F2]/50 hover:bg-[#1877F2]/5 transition-all"
                   >
                     <Facebook className="w-5 h-5 text-[#1877F2] shrink-0" />
@@ -1251,10 +1195,10 @@ exploring:
                     </div>
                   </a>
 
-                  <a 
-                    href={identity.instagram} 
-                    target="_blank" 
-                    rel="noreferrer" 
+                  <a
+                    href={identity.instagram}
+                    target="_blank"
+                    rel="noreferrer"
                     className="flex items-center gap-3 bg-[#1a1b1e] border border-white/5 rounded-xl px-4 py-3 hover:border-[#E1306C]/50 hover:bg-[#E1306C]/5 transition-all"
                   >
                     <Instagram className="w-5 h-5 text-[#E1306C] shrink-0" />
@@ -1268,12 +1212,12 @@ exploring:
                 {/* Fully functional, interactive Contact Form */}
                 <form onSubmit={handleFormSubmit} className="text-left border-t border-white/[0.04] pt-6">
                   <h3 className="text-xs font-mono text-zinc-400 mb-4 uppercase tracking-wider font-semibold">Or send a direct transmission:</h3>
-                  
+
                   <div className="grid sm:grid-cols-2 gap-3 mb-3">
                     <div>
                       <label className="font-mono text-[9px] text-zinc-500 uppercase tracking-widest block mb-1">Your Name</label>
-                      <input 
-                        type="text" 
+                      <input
+                        type="text"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         required
@@ -1283,8 +1227,8 @@ exploring:
                     </div>
                     <div>
                       <label className="font-mono text-[9px] text-zinc-500 uppercase tracking-widest block mb-1">Your Email</label>
-                      <input 
-                        type="email" 
+                      <input
+                        type="email"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         required
@@ -1296,7 +1240,7 @@ exploring:
 
                   <div className="mb-4">
                     <label className="font-mono text-[9px] text-zinc-500 uppercase tracking-widest block mb-1">Message Content</label>
-                    <textarea 
+                    <textarea
                       rows={3}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
@@ -1306,7 +1250,7 @@ exploring:
                     />
                   </div>
 
-                  <button 
+                  <button
                     type="submit"
                     className="w-full py-3 bg-[#00e559] hover:bg-[#00c54c] text-black text-xs font-bold rounded-xl flex items-center justify-center gap-2 transition-all shadow-[0_0_15px_rgba(0,229,89,0.3)] hover:shadow-[0_0_20px_rgba(0,229,89,0.4)]"
                   >
@@ -1332,41 +1276,41 @@ exploring:
 
         {/* Floating Bottom Nav - Mobile/Tablet Only */}
         <div className="md:hidden absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex items-center gap-1.5 p-1.5 bg-[#121316]/90 backdrop-blur-xl border border-white/[0.08] rounded-full shadow-2xl">
-          <button 
+          <button
             onClick={() => setActivePage('home')}
             className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${activePage === 'home' ? 'bg-[#00e559] text-black shadow-[0_0_12px_rgba(0,229,89,0.4)] font-bold' : 'text-zinc-400 hover:text-white hover:bg-white/5'}`}
             title="Home"
           >
             <Home className="w-5 h-5" />
           </button>
-          
-          <button 
+
+          <button
             onClick={() => setActivePage('about')}
             className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${activePage === 'about' ? 'bg-[#00e559] text-black shadow-[0_0_12px_rgba(0,229,89,0.4)] font-bold' : 'text-zinc-400 hover:text-white hover:bg-white/5'}`}
             title="About & Tech Stack"
           >
             <User className="w-5 h-5" />
           </button>
-          
-          <button 
+
+          <button
             onClick={() => setActivePage('projects')}
             className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${activePage === 'projects' ? 'bg-[#00e559] text-black shadow-[0_0_12px_rgba(0,229,89,0.4)] font-bold' : 'text-zinc-400 hover:text-white hover:bg-white/5'}`}
             title="Projects"
           >
             <Layers className="w-5 h-5" />
           </button>
-          
-          <button 
+
+          <button
             onClick={() => setActivePage('achievements')}
             className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${activePage === 'achievements' ? 'bg-[#00e559] text-black shadow-[0_0_12px_rgba(0,229,89,0.4)] font-bold' : 'text-zinc-400 hover:text-white hover:bg-white/5'}`}
             title="Achievements"
           >
             <Award className="w-5 h-5" />
           </button>
-          
+
           <div className="w-[1px] h-5 bg-white/10 mx-1"></div>
-          
-          <button 
+
+          <button
             onClick={() => setActivePage('contact')}
             className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${activePage === 'contact' ? 'bg-[#00e559] text-black shadow-[0_0_12px_rgba(0,229,89,0.4)] font-bold' : 'text-zinc-400 hover:text-white hover:bg-white/5'}`}
             title="Contact"
