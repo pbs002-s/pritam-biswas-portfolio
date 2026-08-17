@@ -5,6 +5,10 @@ export interface Project {
   summary: string;
   detail: string;
   githubUrl: string;
+  repoName?: string;
+  stars?: number;
+  liveUrl?: string;
+  featured?: boolean;
 }
 
 export interface InterestDomain {
@@ -25,3 +29,4 @@ export interface FocusItem {
   building: string[];
   exploring: string[];
 }
+
